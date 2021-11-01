@@ -11,7 +11,6 @@ const connectDB = require('./db/connect');
 
 // import middleware
 const { errorHandlerMiddleware } = require('./middleware');
-const { BadRequestError } = require('./errors');
 
 // use middleware
 
