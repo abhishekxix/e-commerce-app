@@ -1,8 +1,9 @@
+const { StatusCodes } = require('http-status-codes');
 const CustomAPIError = require('./CustomAPIError');
 
-const BadRequestError = (code, msg) => {
+const BadRequestError = (msg) => {
   return {
-    code,
+    code: StatusCodes.BAD_REQUEST,
     ...CustomAPIError(msg),
   };
 };

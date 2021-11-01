@@ -1,8 +1,9 @@
+const { StatusCodes } = require('http-status-codes');
 const CustomAPIError = require('./CustomAPIError');
 
-const ForbiddenError = (code, msg) => {
+const ForbiddenError = (msg) => {
   return {
-    code,
+    code: StatusCodes.FORBIDDEN,
     ...CustomAPIError(msg),
   };
 };
