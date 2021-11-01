@@ -11,11 +11,17 @@ const connectDB = require('./db/connect');
 
 // import middleware
 const { errorHandlerMiddleware } = require('./middleware');
+const { BadRequestError } = require('./errors');
 
 // use middleware
-app.use(errorHandlerMiddleware);
 
 // import routes
+
+app.get('/', (req, res) => {
+  res.send('lmao');
+});
+
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
 
