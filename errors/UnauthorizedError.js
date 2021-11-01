@@ -1,10 +1,10 @@
 const { StatusCodes } = require('http-status-codes');
 const CustomAPIError = require('./CustomAPIError');
 
-const UnauthorizedError = (msg) => {
+const UnauthorizedError = (message) => {
   return {
     code: StatusCodes.UNAUTHORIZED,
-    ...CustomAPIError(msg),
+    ...CustomAPIError(message),
   };
 };
 

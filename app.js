@@ -8,11 +8,15 @@ const app = express();
 
 // import db connection function
 const connectDB = require('./db/connect');
+
 // import middleware
+const { errorHandlerMiddleware } = require('./middleware');
+
+// use middleware
+app.use(errorHandlerMiddleware);
 
 // import routes
 
-// use middleware
 const port = process.env.PORT || 5000;
 
 const start = async () => {
@@ -23,7 +27,3 @@ const start = async () => {
 };
 
 start();
-
-const { BadRequestError } = require('./errors');
-
-throw BadRequestError('I am throwing this error because I want to.');

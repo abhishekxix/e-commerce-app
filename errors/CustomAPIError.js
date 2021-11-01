@@ -1,6 +1,6 @@
-const CustomAPIError = (msg) => {
+const CustomAPIError = (message) => {
   return {
-    msg,
+    message,
   };
 };
 
