@@ -23,3 +23,7 @@ const start = async () => {
 };
 
 start();
+
+const { BadRequestError } = require('./errors');
+
+throw BadRequestError('I am throwing this error because I want to.');
