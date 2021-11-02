@@ -1,3 +1,4 @@
+const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 const {
   UnauthorizedError,
@@ -5,6 +6,7 @@ const {
   BadRequestError,
 } = require('../../errors');
 const User = require('../../models/User');
+const { createTokenUser, attachTokenCookie } = require('../../utils');
 
 const verifyAccountEmail = async (req, res) => {
   const { token } = req.params;
@@ -22,8 +24,10 @@ const verifyAccountEmail = async (req, res) => {
   }
   user.isVerified = true;
   await user.save();
+  const tokenUser = createTokenUser(user);
 
-  res.send('verified');
+  attachTokenCookie(res, tokenUser);
+  res.status(StatusCodes.OK).json({ msg: 'verified.' });
 };
 
 module.exports = verifyAccountEmail;

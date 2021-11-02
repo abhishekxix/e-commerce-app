@@ -2,6 +2,7 @@
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 // create app express instance
 const app = express();
@@ -13,6 +14,7 @@ const connectDB = require('./db/connect');
 const { errorHandlerMiddleware } = require('./middleware');
 
 // use middleware
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
 
 // import routes
