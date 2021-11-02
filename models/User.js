@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const countryStateCity = require('country-state-city');
+const bcrypt = require('bcryptjs');
 const statesOfIndia = new Set(
   countryStateCity.State.getStatesOfCountry('IN').map((state) => state.isoCode)
 );
@@ -71,5 +72,17 @@ const UserSchema = new mongoose.Schema({
     enum: ['admin', 'customer', 'owner'],
   },
 });
+
+UserSchema.pre('save', async function () {
+  if (this.isModified('password')) {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+  }
+});
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
 
 module.exports = mongoose.model('User', UserSchema);
