@@ -71,6 +71,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'customer', 'owner'],
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 UserSchema.pre('save', async function () {
