@@ -15,10 +15,16 @@ const { errorHandlerMiddleware } = require('./middleware');
 // use middleware
 
 // import routes
+const authRouter = require('./routes/auth-routes');
+
+// set up routes
+const apiRoot = '/api/v1/';
 
 app.get('/', (req, res) => {
   res.send('lmao');
 });
+
+app.use(apiRoot + 'auth', authRouter);
 
 app.use(errorHandlerMiddleware);
 
