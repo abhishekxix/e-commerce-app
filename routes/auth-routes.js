@@ -3,7 +3,7 @@ const {
   logInUser,
   logOutUser,
   verifyAccountEmail,
-} = require('../controllers/auth-controllers');
+} = require('../controllers/auth');
 
 const authRouter = require('express').Router();
 
