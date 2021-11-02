@@ -19,7 +19,7 @@ const AddressSchema = new mongoose.Schema({
       validator: function (stateCode) {
         return statesOfIndia.has(stateCode);
       },
-      message: (stateCode) => `${stateCode} is not a valid state code.`,
+      message: (stateCode) => `${stateCode.value} is not a valid state code.`,
     },
   },
   city: {
@@ -30,12 +30,13 @@ const AddressSchema = new mongoose.Schema({
         city = city.toLowerCase();
         const cities = new Set(
           countryStateCity.City.getCitiesOfState('IN', this.stateCode).map(
-            (city) => city.toLowerCase()
+            (stateCity) => stateCity.name.toLowerCase()
           )
         );
         return cities.has(city);
       },
-      message: (city) => `${city} is not a valid city in the provided state.`,
+      message: (city) =>
+        `${city.value} is not a valid city in the provided state.`,
     },
   },
 });
@@ -64,6 +65,10 @@ const UserSchema = new mongoose.Schema({
   address: {
     type: AddressSchema,
     required: [true, 'Please provide address'],
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'customer', 'owner'],
   },
 });
 

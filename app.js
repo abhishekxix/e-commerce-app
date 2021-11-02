@@ -13,6 +13,7 @@ const connectDB = require('./db/connect');
 const { errorHandlerMiddleware } = require('./middleware');
 
 // use middleware
+app.use(express.json());
 
 // import routes
 const authRouter = require('./routes/auth-routes');
