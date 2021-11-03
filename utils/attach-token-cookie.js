@@ -1,7 +1,7 @@
 const createJWT = require('./create-jwt');
 
 const attachTokenCookie = (res, tokenUser) => {
-  const token = createJWT(tokenUser);
+  const token = createJWT(tokenUser, process.env.JWT_LIFETIME);
   const oneDay = 1000 * 60 * 60 * 24;
   res.cookie('token', token, {
     httpOnly: true,

@@ -4,7 +4,10 @@ const createTokenUser = require('./create-token-user');
 
 const sendPasswordResetMail = async (target, user) => {
   const tokenUser = createTokenUser(user);
-  const verificationToken = createJWT(tokenUser);
+  const verificationToken = createJWT(
+    tokenUser,
+    process.env.JWT_VERIFICATION_LIFETIME
+  );
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
