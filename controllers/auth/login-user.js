@@ -5,7 +5,11 @@ const {
   UnauthorizedError,
 } = require('../../errors');
 const User = require('../../models/User');
-const { attachTokenCookie, createTokenUser } = require('../../utils');
+const {
+  attachTokenCookie,
+  createTokenUser,
+  sendVerificationMail,
+} = require('../../utils');
 
 const logInUser = async (req, res) => {
   const { email, password } = req.body;
@@ -21,6 +25,7 @@ const logInUser = async (req, res) => {
   }
 
   if (!user.isVerified) {
+    sendVerificationMail(user.email, user);
     throw UnauthorizedError('Please verify your email id before you log in.');
   }
 
