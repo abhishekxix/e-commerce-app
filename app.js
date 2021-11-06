@@ -19,6 +19,7 @@ app.use(express.json());
 
 // import routes
 const authRouter = require('./routes/auth-routes');
+const userRouter = require('./routes/user-routes');
 
 // set up routes
 const apiRoot = '/api/v1/';
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(apiRoot + 'auth', authRouter);
+app.use(apiRoot + 'users', userRouter);
 
 app.use(errorHandlerMiddleware);
 
