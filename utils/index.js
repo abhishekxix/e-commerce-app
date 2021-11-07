@@ -4,6 +4,7 @@ const createJWT = require('./create-jwt');
 const attachTokenCookie = require('./attach-token-cookie');
 const sendPasswordResetMail = require('./send-reset-password-mail');
 const verifyToken = require('./verify-token');
+const Roles = require('./Roles');
 
 module.exports = {
   sendVerificationMail,
@@ -12,4 +13,5 @@ module.exports = {
   attachTokenCookie,
   sendPasswordResetMail,
   verifyToken,
+  Roles,
 };

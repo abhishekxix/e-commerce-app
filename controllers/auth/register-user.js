@@ -1,6 +1,8 @@
 const User = require('../../models/User');
 const { StatusCodes } = require('http-status-codes');
 const sendVerificationMail = require('../../utils/send-verification-mail');
+const { removeListener } = require('../../models/User');
+const { Roles } = require('../../utils');
 
 const registerUser = async (req, res) => {
   const { name, email, password, address, phoneNumber } = req.body;
@@ -10,7 +12,7 @@ const registerUser = async (req, res) => {
     password,
     address,
     phoneNumber,
-    role: 'customer',
+    role: Roles.CUSTOMER,
   });
 
   await sendVerificationMail(email, user);
