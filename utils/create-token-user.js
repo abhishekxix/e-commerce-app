@@ -1,8 +1,9 @@
-const createTokenUser = ({ name, email, role }) => {
+const createTokenUser = ({ name, email, role, _id: userId }) => {
   return {
     name,
     email,
     role,
+    userId,
   };
 };
 
