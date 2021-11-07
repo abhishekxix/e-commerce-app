@@ -1,5 +1,5 @@
-const verifyToken = (token) => {
-  return jwt.verify(token, process.env.JWT_SECRET);
-};
+const jwt = require('jsonwebtoken');
+
+const verifyToken = (token) => jwt.verify(token, process.env.JWT_SECRET);
 
 module.exports = verifyToken;
