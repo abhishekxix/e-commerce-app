@@ -18,4 +18,15 @@ const authenticateUser = (req, res, next) => {
   next();
 };
 
-module.exports = { authenticateUser };
+const authorizePermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw UnauthorizedError(
+        `You don't have sufficient permissions to perform this operation.`
+      );
+    }
+    next();
+  };
+};
+
+module.exports = { authenticateUser, authorizePermissions };
