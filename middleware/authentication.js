@@ -13,7 +13,8 @@ const authenticateUser = (req, res, next) => {
   } catch (err) {
     throw UnauthorizedError('Invalid token.');
   }
-
+  delete tokenUser.iat;
+  delete tokenUser.exp;
   req.user = tokenUser;
   next();
 };
